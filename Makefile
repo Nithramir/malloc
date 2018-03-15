@@ -17,6 +17,11 @@ SRC_PATH = malloc_src
 OBJ_PATH = malloc_obj
 
 SRC = malloc.o\
+	allocated.o\
+	get_memory_place.o\
+	ft_search_ptr.o\
+	defragmentation.o\
+	ft_search_size.o\
 
 CC = gcc
 
@@ -33,18 +38,18 @@ $(NAME): $(SRC_O)
 	$(CC) -o $(NAME) $(SRC_O) $(LIB)
 
 EXEC: 
-	make -C libft
+	#make -C libft
 
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
-	$(CC) $(FLAG) -c $< -o $@
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(addprefix $(OBJ_PATH)/,$(SRC))
-	make -C libft clean
+	#make -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	make -C libft fclean
+	#make -C libft fclean
 
 re: fclean all
 
