@@ -21,9 +21,9 @@ void *get_large_memory(size_t asked_memory_size, t_mem_zone **zone, size_t zone_
     ft_putendl("yolo");
     if (!(*zone)) {
         ft_putendl("yolo");
+        *zone = init_malloc(zone_size);
         
-        zone = init_malloc(zone_size);
-        ft_printf("malloc initied %p\n", zone);
+        ft_printf("malloc initied %p\n", *zone);
     }
     t_mem_zone *place = get_memory_place(*zone, asked_memory_size, zone_size);
     // ft_printf("add malloc %p\n", place);
@@ -38,7 +38,7 @@ void *ft_malloc(size_t asked_memory_size) {
         return get_tiny_memory(asked_memory_size, &g_malloc.small, MALLOC_SMALL);
     }
     else {
-        return get_large_memory(asked_memory_size, &g_malloc.large, asked_memory_size);
+        return get_large_memory(asked_memory_size, &g_malloc.large, asked_memory_size + 1);
     }
     return NULL;
 }
@@ -128,7 +128,7 @@ void test_no_error_realloc(size_t value) {
 }
 
 void test_no_error(size_t size) {
-    int i = 0;
+    size_t i = 0;
     char *malloced = ft_malloc(size);
     // ft_printf("pointeur: %p\n", malloced);
     while (i < size) {
@@ -151,7 +151,7 @@ void test_no_error_free(size_t size) {
             // ft_putendl("Etrange");
         }
         malloced[i] = 'd';
-        ft_printf("value: %d\n", i);
+        //ft_printf("value: %d\n", i);
         
         i++;
     }
@@ -161,33 +161,34 @@ void test_no_error_free(size_t size) {
 //    // ft_printf("NoProblemWith: %zu\n", size);
 }
 
-int main() {
+int main(int argc, char **argv) {
     // size_t size = getpagesize() * 200;
     // test_no_error(size);
     // test_no_error(10);
     int i = 0;
-    while (i < 300) {
-        // test_no_error_realloc(800);
-        // test_no_error_realloc(10);
-        // test_no_error_realloc(9000);
-        // test_no_error_realloc(4);
+    while (i < ft_atoi(argv[1])) {
+       test_no_error_realloc(800);
+        test_no_error_realloc(10);
+        test_no_error_realloc(4);
         
+        test_no_error_realloc(9000);
+  //
+        test_no_error(60000);
+        test_no_error_free(60000);
     
-        // test_no_error_free(1024);
-        // test_no_error_free(24);
-        // test_no_error_free(1);
-        // test_no_error_free(1023);
-        // test_no_error(1024);
+        test_no_error_free(1024);
+        test_no_error_free(24);
+        test_no_error_free(1);
+        test_no_error_free(1023);
+        test_no_error(1024);
         ft_printf("%zu\n", getpagesize() * 65);
         test_no_error(getpagesize() * 65);
         test_no_error_free(getpagesize() * 65);
 
-        // test_no_error(60000);
-        // test_no_error_free(60000);
-        // test_no_error(3);
-        // test_no_error(4);
-        // test_no_error(5);
-        // test_no_error(6);
+        test_no_error(3);
+        test_no_error(4);
+        test_no_error(5);
+        test_no_error(6);
         ft_printf("value: %d\n", i);
         i++;
     }

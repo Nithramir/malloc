@@ -23,7 +23,7 @@ SRC = malloc.o\
 	defragmentation.o\
 	ft_search_size.o\
 
-CC = gcc
+CC = gcc 
 
 LIB =  libft/libftprintf.a
 
@@ -38,18 +38,18 @@ $(NAME): $(SRC_O)
 	$(CC) -o $(NAME) $(SRC_O) $(LIB)
 
 EXEC: 
-	#make -C libft
+	make -C libft
 
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
 	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(addprefix $(OBJ_PATH)/,$(SRC))
-	#make -C libft clean
+	make -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	#make -C libft fclean
+	make -C libft fclean
 
 re: fclean all
 
