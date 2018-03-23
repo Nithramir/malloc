@@ -39,11 +39,12 @@ typedef struct  s_malloc {
 }               t_malloc;
 
 t_mem_zone *new_mem_zone(size_t size, t_mem_zone *before);
-void *add_malloc(t_mem_zone *zone, size_t asked_memory_size);
+void *add_malloc(t_mem_zone *place, size_t asked_memory_size, int position, int i);
 t_mem_zone *get_memory_place(t_mem_zone *zone, size_t asked_memory_size, size_t zone_size);
 void *get_memory(size_t size);
 int ft_search_ptr(void *ptr, t_mem_zone **zone);
 void defragmentation(t_mem_zone *zone);
 void clean_zone(t_mem_zone *zone, size_t pos, t_mem_zone **first_zone);
 size_t ft_search_size(void *ptr, t_mem_zone *first_zone);
+int  malloc_position(t_mem_zone *place, size_t asked_memory_size, int *i);
 #endif

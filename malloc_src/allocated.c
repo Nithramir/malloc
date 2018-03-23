@@ -67,8 +67,8 @@ t_mem_zone *new_mem_zone(size_t size, t_mem_zone *before) {
     return zone;
 }
 
-size_t  malloc_position(t_mem_zone *place, size_t asked_memory_size, size_t *i) {
-    size_t position;
+int  malloc_position(t_mem_zone *place, size_t asked_memory_size, int *i) {
+    int position;
 
     *i= 0;
     position = 0;
@@ -79,20 +79,17 @@ size_t  malloc_position(t_mem_zone *place, size_t asked_memory_size, size_t *i) 
         position += place->list_malloc[*i].size;  
         (*i)++;
     }
-    // In case there is engouth place, but memory is fragmented
+    // In case memory is fragmented
     if ((place->memory_size - position) < asked_memory_size) {
-        ft_putendl("CA PLANTE");
-        exit(0);
- //       position = defragmentation(place);
+        return -1;
     }
     return position;
 }
 
-void *add_malloc(t_mem_zone *place, size_t asked_memory_size) {
-    size_t i;
+void *add_malloc(t_mem_zone *place, size_t asked_memory_size, int position, int i) {
     t_allocated new_malloc;
-    size_t position;
-    position = malloc_position(place, asked_memory_size, &i);
+    // size_t position;
+    // position = malloc_position(place, asked_memory_size, &i);
 
     new_malloc.size = asked_memory_size;
     new_malloc.position = place->mem_zone + position;

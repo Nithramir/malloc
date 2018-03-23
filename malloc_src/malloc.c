@@ -14,24 +14,15 @@ void *get_tiny_memory(size_t asked_memory_size, t_mem_zone **zone, size_t zone_s
     if (!(*zone)) {
         return NULL;
     }
-    t_mem_zone *place = get_memory_place(*zone, asked_memory_size, zone_size * 100);
-    ft_printf("MEM_ZONE %p\n", place->mem_zone);
-    
-    if (!(place)) {
-        return NULL;
-    }
-    return add_malloc(place, asked_memory_size);
+    return get_memory_place(*zone, asked_memory_size, zone_size * 100);
 }
 
 void *get_large_memory(size_t asked_memory_size, t_mem_zone **zone, size_t zone_size) {
     if (!(*zone)) {
         *zone = init_malloc(zone_size);
     }
-    t_mem_zone *place = get_memory_place(*zone, asked_memory_size, zone_size);
-    if (!(place)) {
-        return NULL;
-    }
-    return add_malloc(place, asked_memory_size);
+    return get_memory_place(*zone, asked_memory_size, zone_size);
+
 }
 
 void *ft_malloc(size_t asked_memory_size) {
