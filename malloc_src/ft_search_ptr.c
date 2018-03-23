@@ -11,9 +11,9 @@ void delete_mem_zone(t_mem_zone *zone, t_mem_zone **first_zone) {
         if (zone->next) {
             zone->next->before = zone->before;
         }
-        free_ptr(zone->mem_zone, zone->memory_size);    
     free_ptr((void*)zone->list_malloc, sizeof(t_allocated) * zone->list_malloc_size);    
-    free_ptr(zone, sizeof(t_mem_zone));    
+    // error
+    // free_ptr(zone, sizeof(t_mem_zone) + zone->memory_size);    
     }
     else {
         // *first_zone = (*first_zone)->next;
@@ -26,9 +26,8 @@ void delete_mem_zone(t_mem_zone *zone, t_mem_zone **first_zone) {
 }
 
 void clean_zone(t_mem_zone *zone, size_t pos, t_mem_zone **first_zone) {
-    
     zone->memory_used -= zone->list_malloc[pos].size;
-    zone->list_malloc[pos].size = 0;
+    // zone->list_malloc[pos].size = 0;
     zone->list_malloc[pos].position = NULL;
     if (zone->memory_used == 0) {
         delete_mem_zone(zone, first_zone);
@@ -45,7 +44,6 @@ int search_in_malloc(void *ptr, t_mem_zone *zone, t_mem_zone **first_zone) {
             clean_zone(zone, i, first_zone);
             return 1;
         }
-        // ft_putendl("not here");
         i++;
     }
     return 0;

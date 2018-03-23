@@ -5,7 +5,7 @@ void *get_memory(size_t size) {
     size_t i = 0;
 
     mem = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_ANON |MAP_PRIVATE, -1, 0);
-    if (!mem) {
+    if (mem == (void *) -1) {
         return NULL;
     }
     while (i < size) {
@@ -50,9 +50,7 @@ t_allocated *set_bigger_list_malloc(t_mem_zone *zone) {
 ** In which we can store malloc
 */
 t_mem_zone *new_mem_zone(size_t size, t_mem_zone *before) {
-    // TODO: Un seul call suffit ici, deux allocations pour rien
-    ft_putendl("NEW");
-    t_mem_zone *zone = get_memory(sizeof(t_mem_zone));
+    t_mem_zone *zone = get_memory(getpagesize());
     if (!zone) {
         return NULL;
     }
@@ -63,7 +61,7 @@ t_mem_zone *new_mem_zone(size_t size, t_mem_zone *before) {
     }
     zone->list_malloc_size = 256;
     zone->memory_size = size;
-    zone-> memory_used = 0;
+    zone->memory_used = 0;
     zone->next = NULL;
     zone->before = before;
     return zone;
@@ -75,19 +73,16 @@ size_t  malloc_position(t_mem_zone *place, size_t asked_memory_size, size_t *i) 
     *i= 0;
     position = 0;
     while ((*i) < place->list_malloc_size && place->list_malloc[*i].size) {
-        
         if (place->list_malloc[*i].position == NULL && place->list_malloc[*i].size >= asked_memory_size) {
-        // ft_putendl("CA PLANTE2");
-            
             return position;
         }
         position += place->list_malloc[*i].size;  
         (*i)++;
     }
-    // ft_putendl("ONSORT");
     // In case there is engouth place, but memory is fragmented
     if ((place->memory_size - position) < asked_memory_size) {
         ft_putendl("CA PLANTE");
+        exit(0);
  //       position = defragmentation(place);
     }
     return position;
@@ -97,34 +92,17 @@ void *add_malloc(t_mem_zone *place, size_t asked_memory_size) {
     size_t i;
     t_allocated new_malloc;
     size_t position;
-
-
     position = malloc_position(place, asked_memory_size, &i);
-    
 
-    ft_printf("used: %zu total %zu asked %zu\n", place->memory_used, place->memory_size, asked_memory_size);
     new_malloc.size = asked_memory_size;
     new_malloc.position = place->mem_zone + position;
     // ft_printf("pos %p et I: %zu\n", new_malloc.position, i);
     // // ft_printf("malloc deja fait %zu: Taille list malloc %zu\n", i,place->list_malloc_size);
     // Case there is more malloc done than the max number of malloc
     if (i == place->list_malloc_size) {
-    ft_printf("MEM_ZONE %p\n", place->mem_zone);
-        
-        ft_printf("NEEED BIGGER LIST MALLOC\n");
-        // ft_printf("%p\n", place->list_malloc);
         set_bigger_list_malloc(place);
-   
-        
-        // ft_printf("%p\n", place->list_malloc);
     }
-    ft_printf("memzone: %p et position: %zu\n", place->mem_zone, position);
-    
     place->list_malloc[i] = new_malloc;
-    ft_printf("memzone: %p et position: %zu\n", place->mem_zone, position);
-    
     place->memory_used = asked_memory_size + place->memory_used;
-    ft_printf("memzone: %p et position: %zu\n", place->mem_zone, position);
-    ft_printf("adding: %p\n", place->mem_zone + position);
     return place->mem_zone + position;
 }

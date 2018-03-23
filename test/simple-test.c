@@ -6,7 +6,7 @@ int test_free(void *ptr) {
 }
 
 int test_malloc_size(size_t number, int print) {
-    int *simple_malloc = (int*)malloc(number * 4);
+    int *simple_malloc = (int*)ft_malloc(number * 4);
     if (print) {
         ft_printf("Pointeur retourné %p", simple_malloc);
     }

@@ -6,7 +6,6 @@ size_t search_size_in_malloc(void *ptr, t_mem_zone *zone) {
     i = 0;
     while (i < zone->list_malloc_size) {
         if (zone->list_malloc[i].position == ptr) {
-            // // ft_printf("size  %zu", zone->list_malloc[i].size);
             return zone->list_malloc[i].size;
         }
         i++;
