@@ -2,7 +2,7 @@
 
 t_mem_zone  *search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size) {
     while (zone) {
-       // ft_printf("memory_size: %zu, memory_used: %zu, askedmemrory: %zu\n", zone->memory_size, zone->memory_used, asked_memory_size);
+       // // ft_printf("memory_size: %zu, memory_used: %zu, askedmemrory: %zu\n", zone->memory_size, zone->memory_used, asked_memory_size);
         if (zone->memory_size - zone->memory_used >= asked_memory_size) {
             return (zone);
         }
@@ -25,7 +25,7 @@ t_mem_zone *get_memory_place(t_mem_zone *zone, size_t asked_memory_size, size_t 
         place = new_mem_zone(zone_size, zone);
         zone->next = place;
     }
-    // ft_printf("New allocated place: %p\n", place);
+    // // ft_printf("New allocated place: %p\n", place);
     return place;
     
 }

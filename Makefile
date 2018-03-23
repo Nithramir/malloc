@@ -23,7 +23,7 @@ SRC = malloc.o\
 	defragmentation.o\
 	ft_search_size.o\
 
-CC = gcc 
+CC = gcc -g
 
 LIB =  libft/libftprintf.a
 
