@@ -138,7 +138,8 @@ void test_no_error_free(size_t size) {
     ft_printf("pointeur: %p\n", malloced);
     while (i < size) {
         if (malloced[i] == 'd') {
-            // // ft_putendl("Etrange");
+            ft_putendl("Etrange");
+            exit(0);
         }
         malloced[i] = 'd';
         //// ft_printf("value: %d\n", i);
