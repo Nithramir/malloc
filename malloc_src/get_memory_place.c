@@ -30,9 +30,8 @@ t_mem_zone *get_memory_place(t_mem_zone *zone, size_t asked_memory_size, size_t 
         }
         place = new_mem_zone(zone_size, zone);
         zone->next = place;
-        search_allocated_zone(place, asked_memory_size);
+        place = search_allocated_zone(place, asked_memory_size);
     }
     // ft_printf("MEM_ZONE %p\n", place->mem_zone);    
-    return place;
-    
+    return place;    
 }

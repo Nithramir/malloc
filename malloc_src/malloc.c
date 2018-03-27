@@ -58,7 +58,7 @@ void *ft_realloc(void *ptr, size_t new_size) {
     size_t size;
 
     size = 0;
-    if (g_malloc.large)
+    if (g_malloc.large) 
         size = ft_search_size(ptr, g_malloc.large);
     if (!size && g_malloc.small)
         size = ft_search_size(ptr, g_malloc.small);
@@ -75,7 +75,7 @@ void *ft_realloc(void *ptr, size_t new_size) {
         return NULL;
     }
     ft_strncpy(new_ptr, ptr, new_size);
-    ft_free(ptr);
+    // ft_free(ptr);
     return new_ptr;
 }
 
@@ -115,8 +115,8 @@ void test_no_error_realloc(size_t value) {
     malloced = ft_realloc(malloced, value);
     // // ft_printf("ptr %p\n", malloced);
     // ft_putendl(malloced);
-}
 
+}
 void test_no_error(size_t size) {
     size_t i = 0;
     char *malloced = ft_malloc(size);
@@ -147,14 +147,14 @@ void test_no_error_free(size_t size) {
     }
     // ft_putendl("sortie");
     // show_alloc_mem();
-    ft_free(malloced);
+    // ft_free(malloced);
 //    // // ft_printf("NoProblemWith: %zu\n", size);
 }
 
 void test_defragmentation() {
     void *a = ft_malloc(1024);
     void *b = ft_malloc(1024);
-    // ft_free(b);
+    ft_free(b);
     void *c = ft_malloc(1024);
     void *d = ft_malloc(1024);
     void *e = ft_malloc(1024);
@@ -164,37 +164,44 @@ void test_defragmentation() {
 }
 
 int main(int argc, char **argv) {
-test_defragmentation();
+// test_defragmentation();
     // size_t size = getpagesize() * 200;
-    // test_no_error(size);
-    // test_no_error(10);
-    // int i = 0;
-    // while (i < ft_atoi(argv[1])) {
-    //     test_no_error_realloc(10);
-    //    test_no_error_realloc(800);
-    //     test_no_error_realloc(21);
-    //     test_no_error_realloc(9000);
-        
-    //     test_no_error(60000);
-    //     test_no_error_free(60000);
-    
-    //     test_no_error_free(1024);
-    //     test_no_error_free(24);
-    //     test_no_error_free(1);
-    //     test_no_error_free(1023);
-    //     test_no_error_free(getpagesize() * 65);
-    //     // ft_printf("%zu\n", getpagesize() * 65);
+    test_no_error_realloc(10);
+        show_alloc_mem();
 
-    //     test_no_error(getpagesize() * 65);
-    //     test_no_error(1024);
-    //     test_no_error(3);
-    //     test_no_error(4);
-    //     test_no_error(5);
-    //     test_no_error(6);
-    //     ft_printf("value: %d\n", i);
-    //     i++;
-    // }
-    // show_alloc_mem();
+    test_no_error_realloc(10);
+    test_no_error_realloc(10);
+    test_no_error_realloc(10);
+    
+    test_no_error(10);
+    int i = 0;
+    while (i < ft_atoi(argv[1])) {
+        test_no_error_realloc(10);
+        test_no_error_realloc(800);
+        test_no_error_realloc(21);
+        // show_alloc_mem();
+    
+        test_no_error_realloc(9000);
+
+        test_no_error(60000);
+        test_no_error_free(60000);
+        test_no_error_free(1024);
+        test_no_error_free(24);
+        test_no_error_free(1);
+        test_no_error_free(1023);
+        test_no_error_free(getpagesize() * 65);
+        // ft_printf("%zu\n", getpagesize() * 65);
+
+        test_no_error(getpagesize() * 65);
+        test_no_error(1024);
+        test_no_error(3);
+        test_no_error(4);
+        test_no_error(5);
+        test_no_error(6);
+        ft_printf("value: %d\n", i);
+        // show_alloc_mem();
+        i++;
+    }
     
     return 0;
 }
