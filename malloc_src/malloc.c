@@ -120,15 +120,12 @@ void test_no_error_realloc(size_t value) {
 void test_no_error(size_t size) {
     size_t i = 0;
     char *malloced = ft_malloc(size);
-    // // ft_printf("pointeur: %p\n", malloced);
     while (i < size) {
         malloced[i] = 'd';
-        // // ft_printf("value: %d\n", i);
         
         i++;
     }
 //    ft_free(malloced);
-//    // // ft_printf("NoProblemWith: %zu\n", size);
 }
 
 void test_no_error_free(size_t size) {
@@ -139,7 +136,7 @@ void test_no_error_free(size_t size) {
     while (i < size) {
         if (malloced[i] == 'd') {
             ft_putendl("Etrange");
-            exit(0);
+            // exit(0);
         }
         malloced[i] = 'd';
         //// ft_printf("value: %d\n", i);
