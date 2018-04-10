@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2017/05/04 21:04:22 by bandre           ###   ########.fr        #
+#    Updated: 2018/04/10 20:14:42 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = malloc
+NAME = libft_malloc.so
 
 SRC_PATH = malloc_src
 
@@ -20,8 +20,8 @@ SRC = malloc.o\
 	allocated.o\
 	get_memory_place.o\
 	ft_search_ptr.o\
-	defragmentation.o\
 	ft_search_size.o\
+	show_mem.o\
 
 CC = gcc -g
 
@@ -35,13 +35,13 @@ SRC_C = $(addprefix $(SRC_PATH)/,$(SRC))
 all: EXEC $(NAME)
 
 $(NAME): $(SRC_O)
-	$(CC) -o $(NAME) $(SRC_O) $(LIB)
+	$(CC) -shared -o $(NAME) $(SRC_O) $(LIB) $(FLAG)
 
 EXEC: 
 	make -C libft
 
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
-	$(CC) -c $< -o $@
+	$(CC) -c $< -o $@ $(FLAG)
 
 clean:
 	rm -f $(addprefix $(OBJ_PATH)/,$(SRC))
