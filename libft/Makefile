@@ -6,13 +6,15 @@
 #    By: bandre <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 20:53:12 by bandre            #+#    #+#              #
-#    Updated: 2017/03/20 23:38:57 by bandre           ###   ########.fr        #
+#    Updated: 2016/12/04 19:44:46 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC_PATH = libft
+
+SRC_PATH_PRINTF = ft_printf/
 
 SRC_NAME = ft_atoi.c\
 		   ft_isdigit.c\
@@ -74,30 +76,27 @@ SRC_NAME = ft_atoi.c\
 		   ft_lstiter.c\
 		   ft_lstmap.c\
 		   ft_putlst.c\
-		   ft_itoa_base.c\
 		   ft_itoa_base_signed.c\
-		   get_next_line.c\
-		   ft_affichage.c\
-		   ft_gestion_flag.c\
-		   ft_gestion_precision.c\
-		   ft_gestionspe.c\
-		   ft_printf.c\
-		   ft_unicode.c\
-		   ft_cassupp.c\
-		   ft_initparam.c\
-		   specifier.c\
-		   ft_ptradd.c\
-		   ft_ptradd_free.c\
-		   ft_afficher_tab_c.c\
-		   ft_is_number.c\
-		   mem_stock.c\
-		   mem_stock_free.c\
-		   mem_free_ptr.c\
+		   ft_itoa_base.c\
 
+SRC_PRINTF = ft_affichage.c\
+			 ft_gestion_flag.c\
+			 ft_gestion_precision.c\
+			 ft_gestionspe.c\
+			 ft_printf.c\
+			 ft_unicode.c\
+			 ft_cassupp.c\
+			 ft_initparam.c\
+			 specifier.c\
+
+OBJ_PATH = obj
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
+OBJPRINTF = $(SRC_PRINTF:.c=.o)
 
-OBJ = $(addprefix $(SRC_PATH)/,$(OBJ_NAME))
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+SRCPRINTF = $(addprefix $(SRC_PATH_PRINTF)/,$(SRC_PRINTF))
 
 CPPFLAGS = -I.
 
@@ -106,14 +105,12 @@ CFLAGS = -Werror -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+$(NAME):
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(SRC) $(SRCPRINTF)
+	ar rc $(NAME) $(OBJ_NAME) $(OBJPRINTF)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_NAME) $(OBJPRINTF)
 
 fclean: clean
 	rm -rf $(NAME)

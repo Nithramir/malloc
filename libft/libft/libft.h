@@ -6,7 +6,7 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 20:40:27 by bandre            #+#    #+#             */
-/*   Updated: 2017/03/21 00:18:25 by bandre           ###   ########.fr       */
+/*   Updated: 2016/12/05 00:44:02 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "ft_printf.h"
 
 typedef struct		s_list
 {
@@ -24,17 +23,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct		s_mem
-{
-	void			**list_ptr;
-	struct s_mem	*next;
-}					t_mem_stock;
-
-void				*mem_stock(int i);
-t_mem_stock			**mem_ptr(void);
-void				mem_stock_free(void);
-void				mem_free_ptr(void *ptr);
 
 void				*ft_memset(void *str, int c, size_t n);
 void				ft_bzero(void *str, size_t n);
@@ -59,7 +47,7 @@ char				*ft_itoa_base(size_t value, int base, int m);
 char				*ft_strnstr(const char *str, const char *subs, size_t len);
 int					ft_strcmp(const char *str1, const char *str2);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
-ssize_t				ft_atoi(char *str);
+int					ft_atoi(char *str);
 size_t				ft_strlcat(char *dst, const char*src, size_t size);
 
 void				ft_putchar(char c);
@@ -101,7 +89,6 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-int					ft_is_number(char *str);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
@@ -110,10 +97,5 @@ void				ft_lstadd(t_list **alst, t_list *newt);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_putlst(t_list *lst);
-int					get_next_line(const int fd, char **line);
-
-void				**ft_ptradd(void **list, void *add);
-void				**ft_ptradd_free(void **list, void *add);
-void				ft_afficher_tab_c(char **tab);
 
 #endif

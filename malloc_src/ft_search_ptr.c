@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:13:54 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/10 17:07:05 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/12 19:47:33 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	free_ptr(void *ptr, size_t size)
 {
 	munmap(ptr, size);
+	ft_putendl("pas tres opti tout ca");
 }
 
 void	delete_mem_zone(t_mem_zone *zone)
 {
+	
 	if (zone->before)
 	{
 		zone->before->next = zone->next;
@@ -33,8 +35,11 @@ void	delete_mem_zone(t_mem_zone *zone)
 
 void	clean_zone(t_mem_zone *zone, size_t pos)
 {
-	zone->memory_used -= zone->list_malloc[pos].size;
+	ft_putnbr(zone->list_malloc[pos].size);
+	ft_putendl("");
+	zone->memory_used -= zone->list_malloc[pos].size + 1;
 	zone->list_malloc[pos].position = NULL;
+		ft_putendl("yolo");
 	if (zone->memory_used == 0)
 	{
 		delete_mem_zone(zone);

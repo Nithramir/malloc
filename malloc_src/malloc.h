@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:45:02 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/10 20:40:35 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/12 17:08:12 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,21 @@ typedef struct			s_malloc {
 	void				*list_allocated;
 }						t_malloc;
 
-t_mem_zone				*new_mem_zone(size_t size, t_mem_zone *before);
+t_mem_zone				*create_mem_zone(size_t size, t_mem_zone *before);
 void					*add_malloc(t_mem_zone *place, size_t asked_memory_size,
 	int position, size_t i);
-t_mem_zone				*get_memory_place(t_mem_zone *zone,
+t_mem_zone				*get_memory_position(t_mem_zone *zone,
 	size_t asked_memory_size, size_t zone_size);
-void					*get_memory(size_t size);
+void					*create_initialized_memory(size_t size);
 int						ft_search_ptr(void *ptr, t_mem_zone **zone);
 void					clean_zone(t_mem_zone *zone, size_t pos);
 size_t					ft_search_size(void *ptr, t_mem_zone *first_zone);
 int						malloc_position(t_mem_zone *place,
 	size_t asked_memory_size, size_t *i);
-void					show_alloc_mem(t_malloc g_malloc);
+void					show_alloc_mem();
 void					*malloc(size_t size);
 void					free(void *ptr);
 void					*realloc(void *ptr, size_t new_size);
+void					show_zone(t_mem_zone *first);
+
 #endif

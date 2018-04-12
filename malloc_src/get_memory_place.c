@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:18:17 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/10 20:42:42 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/12 19:53:15 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 
 	i = 0;
 	// ft_putendl("search allocated wone enter");
+	// ft_printf("mem_size: %zu et mem_used: %zu\n", zone->memory_size, zone->memory_used );
 	while (zone)
 	{
-		if (zone->memory_size - zone->memory_used >= asked_memory_size)
+		if (zone->memory_size - zone->memory_used > asked_memory_size)
 		{
 			position = malloc_position(zone, asked_memory_size, &i);
 			if (position != -1)
@@ -40,7 +41,7 @@ void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 ** else create a new allocated zone
 */
 
-t_mem_zone	*get_memory_place(t_mem_zone *zone, size_t asked_memory_size,
+t_mem_zone	*get_memory_position(t_mem_zone *zone, size_t asked_memory_size,
 	size_t zone_size)
 {
 	// ft_putendl("get_memory_place enter");
@@ -53,7 +54,7 @@ t_mem_zone	*get_memory_place(t_mem_zone *zone, size_t asked_memory_size,
 		{
 			zone = zone->next;
 		}
-		place = new_mem_zone(zone_size, zone);
+		place = create_mem_zone(zone_size, zone);
 		zone->next = place;
 		place = search_allocated_zone(place, asked_memory_size);
 	}

@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:10:39 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/10 21:13:57 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/12 17:47:18 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ size_t	ft_search_size(void *ptr, t_mem_zone *first_zone)
 	size_t	result;
 
 	result = 0;
+
 	while (first_zone && result == 0)
 	{
 		result = search_size_in_malloc(ptr, first_zone);

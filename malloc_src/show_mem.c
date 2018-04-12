@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:49:05 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/10 17:08:05 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/12 17:43:57 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	show_zone(t_mem_zone *first)
 	size_t		i;
 	t_allocated	elem;
 	int			index;
+	size_t		allocated_mem = 0;
+	int memszones = 0;
 
 	index = 0;
 	while (first)
@@ -27,23 +29,16 @@ void	show_zone(t_mem_zone *first)
 			elem = first->list_malloc[i];
 			if (elem.size != 0)
 			{
-				ft_printf("%p - %p : %zu\n", elem.position,
-					elem.position + elem.size, elem.size);
+				// ft_printf("%p - %p : %zu\n", elem.position, elem.position + elem.size, elem.size);
 				index++;
+				allocated_mem += elem.size;
 			}
 			i++;
 		}
+		ft_putendl("new mem_zone");
+		memszones += 1;
 		first = first->next;
 	}
 	ft_printf("Number of allocations: %d\n\n", index);
-}
-
-void	show_alloc_mem(t_malloc g_malloc)
-{
-	ft_putendl("TINY");
-	show_zone(g_malloc.tiny);
-	ft_putendl("SMALL");
-	show_zone(g_malloc.small);
-	ft_putendl("LARGE");
-	show_zone(g_malloc.large);
+	// ft_printf("qllocqted size: %zu\n", allocated_mem);
 }

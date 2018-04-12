@@ -6,11 +6,11 @@
 #    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2018/04/10 20:14:42 by bandre           ###   ########.fr        #
+#    Updated: 2018/04/12 19:01:27 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft_malloc.so
+NAME = malloc
 
 SRC_PATH = malloc_src
 
@@ -27,7 +27,7 @@ CC = gcc -g
 
 LIB =  libft/libftprintf.a
 
-FLAG = -Wall -Wextra -Werror -O
+FLAG = #-Wall -Wextra -Werror -O
 
 SRC_O = $(addprefix $(OBJ_PATH)/,$(SRC))
 SRC_C = $(addprefix $(SRC_PATH)/,$(SRC))

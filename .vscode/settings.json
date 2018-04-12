@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "malloc.h": "c",
-        "mman.h": "c"
-    }
+	"files.associations": {
+		"malloc.h": "c",
+		"mman.h": "c",
+		"stdlib.h": "c"
+	}
 }

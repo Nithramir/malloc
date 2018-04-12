@@ -6,17 +6,15 @@
 /*   By: bandre <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/11 11:27:56 by bandre            #+#    #+#             */
-/*   Updated: 2016/12/12 19:35:50 by bandre           ###   ########.fr       */
+/*   Updated: 2016/11/10 14:13:49 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static ssize_t	extend(char *str, ssize_t nb)
+static int	extend(char *str, int nb)
 {
-	int		len;
-	size_t	puissance;
-	ssize_t	result;
+	int len;
+	int puissance;
+	int result;
 
 	result = 0;
 	puissance = 1;
@@ -40,10 +38,10 @@ static ssize_t	extend(char *str, ssize_t nb)
 		return (result);
 }
 
-ssize_t			ft_atoi(char *str)
+int			ft_atoi(char *str)
 {
-	ssize_t		nb;
-	int			continuer;
+	int nb;
+	int continuer;
 
 	continuer = 1;
 	while (continuer == 1)
