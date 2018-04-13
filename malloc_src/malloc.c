@@ -18,7 +18,7 @@ void	*get_tiny_memory(size_t asked_memory_size,
 	t_mem_zone **zone, size_t zone_size)
 {
 	if (!(*zone))
-		*zone = create_mem_zone(zone_size * 64, NULL);
+		*zone = create_mem_zone(zone_size * , NULL);
 	if (!(*zone))
 		return (NULL);
 	void* retour = get_memory_position(*zone, asked_memory_size, zone_size * 64);
