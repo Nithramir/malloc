@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:18:17 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/12 19:53:15 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/13 14:28:16 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 	// ft_printf("mem_size: %zu et mem_used: %zu\n", zone->memory_size, zone->memory_used );
 	while (zone)
 	{
-		if (zone->memory_size - zone->memory_used > asked_memory_size)
+		if (zone->memory_size - zone->memory_used >= asked_memory_size)
 		{
 			position = malloc_position(zone, asked_memory_size, &i);
 			if (position != -1)
@@ -44,7 +44,6 @@ void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 t_mem_zone	*get_memory_position(t_mem_zone *zone, size_t asked_memory_size,
 	size_t zone_size)
 {
-	// ft_putendl("get_memory_place enter");
 	void *place;
 
 	place = search_allocated_zone(zone, asked_memory_size);
@@ -58,6 +57,5 @@ t_mem_zone	*get_memory_position(t_mem_zone *zone, size_t asked_memory_size,
 		zone->next = place;
 		place = search_allocated_zone(place, asked_memory_size);
 	}
-	// ft_putendl("get_memory_place out");
 	return (place);
 }

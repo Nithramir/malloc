@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:32:15 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/12 19:26:54 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/13 14:26:27 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ void	*get_tiny_memory(size_t asked_memory_size,
 	t_mem_zone **zone, size_t zone_size)
 {
 	if (!(*zone))
-		*zone = create_mem_zone(zone_size * 2, NULL);
+		*zone = create_mem_zone(zone_size * 64, NULL);
 	if (!(*zone))
 		return (NULL);
-	void* retour = get_memory_position(*zone, asked_memory_size, zone_size * 2);
-	ft_putendl("sortie");
+	void* retour = get_memory_position(*zone, asked_memory_size, zone_size * 64);
 	return retour;
 }
 
@@ -35,16 +34,13 @@ void	*get_large_memory(size_t asked_memory_size,
 }
 
 void	*malloc(size_t asked_mem_size)
-{
-		ft_putendl("entree");
-	
+{	
 	if (asked_mem_size < (size_t)MALLOC_TINY)
 		return (get_tiny_memory(asked_mem_size, &g_malloc.tiny, (size_t)MALLOC_TINY));
 	else if (asked_mem_size < (size_t)MALLOC_SMALL)
 		return (get_tiny_memory(asked_mem_size, &g_malloc.small, (size_t)MALLOC_SMALL));
 	else
 	{
-		ft_putendl("plop");
 		return (get_large_memory(asked_mem_size, &g_malloc.large,
 			asked_mem_size + 1));
 	}
@@ -96,7 +92,6 @@ void	*realloc(void *ptr, size_t new_size)
 	}
 	if (!size)
 	{
-		ft_putendl("NOT FOUND");
 		return (NULL);
 	}
 	
@@ -110,8 +105,6 @@ void	*realloc(void *ptr, size_t new_size)
 	int i = 0;
 	char *ptr2 = ptr;
 	size = (size < new_size) ? size : new_size;
-	ft_putnbr(size);
-	ft_putendl("");
 	while (i < size) {
 		new_ptr[i] = ptr2[i];
 		i++;

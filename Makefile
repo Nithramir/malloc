@@ -6,7 +6,7 @@
 #    By: bandre <bandre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 16:17:12 by bandre            #+#    #+#              #
-#    Updated: 2018/04/12 19:01:27 by bandre           ###   ########.fr        #
+#    Updated: 2018/04/13 14:35:42 by bandre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC_C = $(addprefix $(SRC_PATH)/,$(SRC))
 all: EXEC $(NAME)
 
 $(NAME): $(SRC_O)
-	$(CC) -shared -o $(NAME) $(SRC_O) $(LIB) $(FLAG)
+	$(CC) $(FLAG) -shared -o $(NAME) $(SRC_O) $(LIB) $(FLAG)
 
 EXEC: 
 	make -C libft
