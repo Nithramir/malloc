@@ -6,7 +6,7 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:13:54 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/12 20:40:48 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/24 14:46:49 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	free_ptr(void *ptr, size_t size)
 
 void	delete_mem_zone(t_mem_zone *zone)
 {
-	
 	if (zone->before)
 	{
 		zone->before->next = zone->next;

@@ -6,20 +6,50 @@
 /*   By: bandre <bandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 16:18:17 by bandre            #+#    #+#             */
-/*   Updated: 2018/04/13 14:28:16 by bandre           ###   ########.fr       */
+/*   Updated: 2018/04/24 17:39:30 by bandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+int			malloc_position(t_mem_zone *place,
+	size_t asked_memory_size, size_t *i)
+{
+	size_t position;
+
+	*i = 0;
+	position = 0;
+	while ((*i) < place->list_malloc_size && place->list_malloc[*i].size)
+	{
+		if (place->list_malloc[*i].position == NULL
+			&& place->list_malloc[*i].size >= asked_memory_size)
+			return (position);
+		position += place->list_malloc[*i].size;
+		(*i)++;
+	}
+	if ((place->memory_size - position) < asked_memory_size)
+		return (-1);
+	return (position);
+}
+
+void		*add_malloc(t_mem_zone *place, size_t asked_memory_size,
+	int position, size_t i)
+{
+	if (i == place->list_malloc_size)
+		set_bigger_list_malloc(place);
+	if (!place->list_malloc[i].size)
+		place->list_malloc[i].size = asked_memory_size;
+	place->list_malloc[i].position = (void*)place->mem_zone + position;
+	place->memory_used = asked_memory_size + place->memory_used;
+	return (place->mem_zone + position);
+}
+
 void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 {
-	size_t i;
-	int position;
+	size_t	i;
+	int		position;
 
 	i = 0;
-	// ft_putendl("search allocated wone enter");
-	// ft_printf("mem_size: %zu et mem_used: %zu\n", zone->memory_size, zone->memory_used );
 	while (zone)
 	{
 		if (zone->memory_size - zone->memory_used >= asked_memory_size)
@@ -32,7 +62,6 @@ void		*search_allocated_zone(t_mem_zone *zone, size_t asked_memory_size)
 		}
 		zone = zone->next;
 	}
-	// ft_putendl("search allocated wone out");
 	return (NULL);
 }
 

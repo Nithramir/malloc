@@ -2,6 +2,7 @@
 	"files.associations": {
 		"malloc.h": "c",
 		"mman.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"libft.h": "c"
 	}
 }
